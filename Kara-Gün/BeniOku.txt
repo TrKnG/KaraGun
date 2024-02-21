@@ -1,4 +1,4 @@
-KaraGün.exe kodun çalıştırılabilir halidir
+KaraGün.exe kodun çalıştırılabilir halidir. Ancak eski sürümünü kullanır 
 Home.html kodun çalıştırılmasından sonra oluşmuş dosya
 Veri tabanına veriler kayıtlı olduğu için bu bilgisayarda 2.kere çalışınca otomatik olarak aynı dosya açlmış olacak
 Her siteden 10 sayfa veri çekiyor
