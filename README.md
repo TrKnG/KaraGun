@@ -11,6 +11,8 @@ Projeyi çalıştırabilmek için python ve mongodb servisi yüklü olması gere
 
 #Veritabanına bağlanmak için
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+
 mydb = myclient["Web_Scraping"]
+
 mycol =mydb["Laptop"]
 
