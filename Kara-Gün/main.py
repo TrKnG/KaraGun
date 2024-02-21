@@ -192,7 +192,7 @@ for y in mycol.find():
 tablo_metin = ""
 for z in tablo_ekle:
     tablo_metin = tablo_metin + z
-contents = '''<!DOCTYPE html>
+contents = f'''<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="utf-8"/>
@@ -202,73 +202,86 @@ contents = '''<!DOCTYPE html>
 <script src="../jquery.simplePagination.js"></script>
 <link href="../simplePagination.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-table {
-    width: 40em;
-    margin: 2em auto;
-    }
+table {{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}}
 
-    thead {
-    background: #000;
+th, td {{
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}}
+
+th {{
+    background-color: #333;
     color: #fff;
-    }
+}}
 
-    td {
-    width: 10em;
-    padding: 0.3em;
-    }
+tbody tr:nth-child(even) {{
+    background-color: #f2f2f2;
+}}
 
-    tbody {
-    background: #ccc;
-    }
+tbody tr:hover {{
+    background-color: #ddd;
+}}
 
-    </style>
-
-    <script>
-function test(pageNumber)
-{
-
-  var page="#page-id-"+pageNumber;
-  $('.select').hide()
-  $(page).show()
-
-}
-</script>
-</head>
-<body>
-<form action="" name="aramakutusu" method="get">
-     <input type="text" id='myInput' onkeyup='searchTable()' name="arama" placeholder="Arama"\>
-</form>
+input[type=text] {{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}}
+</style>
 <script>
-function searchTable() {
-    var input, filter, found, table, tr, td, i, j;
+function searchTable() {{
+    var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     table = document.getElementById("myTable");
     tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td");
-        for (j = 0; j < td.length; j++) {
-            if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                found = true;
-            }
-        }
-        if (found) {
-            tr[i].style.display = "";
-            found = false;
-        } else {
-            tr[i].style.display = "none";
-        }
-    }
-}
+    for (i = 0; i < tr.length; i++) {{
+        td = tr[i].getElementsByTagName("td")[0]; // Sadece ilk sütunu ara
+        if (td) {{
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {{
+                tr[i].style.display = "";
+            }} else {{
+                tr[i].style.display = "none";
+            }}
+        }}
+    }}
+}}
 </script>
-<table border="10" id='myTable' bgcolor="#17E066">
-<tbody>
-%s
-</tbody>
-</table>
+</head>
+<body>
+<div id="container">
+    <div id="search-container">
+        <input type="text" id="myInput" onkeyup="searchTable()" name="arama" placeholder="Ara...">
+    </div>
+    <table border="1" id="myTable">
+        <thead>
+            <tr>
+                <th>Ürün Numarası</th>
+                <th>Ürün Adı</th>
+                <th>Ürün Yıldız</th>
+                <th>Ürünü Puanlayan Kişi Sayısı</th>
+                <th>Ürün Fiyatı</th>
+                <th>Ürünün Linki</th>
+                <th>Ürünün Satıldığı Site</th>
+                <th>Ürünün Fotoğrafı</th>
+            </tr>
+        </thead>
+        <tbody>
+            {tablo_metin}
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
-'''%(tablo_metin)
+'''
+
 
 net_ad = 'home.html'
 
